@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ if .Params.lead }}<p class="lead">{{ .Params.lead }}</p>{{ end }}
+    {{ if .Params.showLegalDate | default false }}
+    <p class="updated">{{ i18n "last_updated" }}: {{ .Site.Params.legalUpdated }}</p>
+    {{ end }}
+  </div>
+</div>
+<article class="container prose">
+  {{ if .Params.toc | default false }}
+  <nav class="toc" aria-label="{{ i18n "on_this_page" }}">
+    <strong>{{ i18n "on_this_page" }}</strong>
+    {{ .TableOfContents }}
+  </nav>
+  {{ end }}
+  {{ .Content }}
+</article>
+{{ end }}

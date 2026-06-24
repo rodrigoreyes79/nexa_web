@@ -1,0 +1,85 @@
+{{ define "main" }}
+{{ $h := .Params.hero }}
+
+<section class="hero">
+  <div class="container hero-inner">
+    {{ with $h.eyebrow }}<span class="eyebrow"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:#11c6d6;display:inline-block"></span>{{ . }}</span>{{ end }}
+    <h1>{{ $h.heading }}</h1>
+    <p class="lead">{{ $h.lead }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ (.GetPage "/contact").RelPermalink }}">{{ $h.ctaPrimary }}</a>
+      <a class="btn btn-ghost" href="{{ (.GetPage "/pricing").RelPermalink }}">{{ $h.ctaSecondary }}</a>
+    </div>
+    {{ with $h.trust }}
+    <div class="hero-trust">
+      {{ range . }}<span><span class="dot"></span>{{ . }}</span>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+{{ with .Params.services }}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>{{ .heading }}</h2>
+      <p>{{ .subheading }}</p>
+    </div>
+    <div class="grid grid-3">
+      {{ range .items }}
+      <div class="card">
+        <div class="card-icon" aria-hidden="true">{{ .icon }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .body }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.steps }}
+<section class="section section-tint">
+  <div class="container">
+    <div class="section-head">
+      <h2>{{ .heading }}</h2>
+      <p>{{ .subheading }}</p>
+    </div>
+    <div class="steps">
+      {{ range .items }}
+      <div class="step">
+        <h3>{{ .title }}</h3>
+        <p>{{ .body }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.integrations }}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>{{ .heading }}</h2>
+      <p>{{ .subheading }}</p>
+    </div>
+    <div class="logos">
+      {{ range .items }}<span class="logo-pill">{{ . }}</span>{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.cta }}
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>{{ .heading }}</h2>
+      <p>{{ .body }}</p>
+      <a class="btn btn-light" href="{{ ($.GetPage "/contact").RelPermalink }}">{{ .button }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

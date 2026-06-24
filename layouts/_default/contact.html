@@ -1,0 +1,54 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.lead }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      {{ .Content }}
+      <div class="info-item">
+        <strong>{{ i18n "contact_email_label" }}</strong>
+        <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+      </div>
+      <div class="info-item">
+        <strong>{{ .Params.addressLabel }}</strong>
+        {{ .Site.Params.legalName }}<br>
+        {{ .Site.Params.address }}
+      </div>
+      <div class="info-item">
+        <strong>NIF</strong>
+        {{ .Site.Params.nif }}
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      {{/* Set params.formAction to your Formspree (or other) endpoint. Falls back to mailto. */}}
+      {{ $action := .Params.formAction | default (printf "mailto:%s" .Site.Params.email) }}
+      <form class="contact-form" action="{{ $action }}" method="POST">
+        <div class="form-field">
+          <label for="name">{{ .Params.labelName }}</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">{{ .Params.labelEmail }}</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-field">
+          <label for="company">{{ .Params.labelCompany }}</label>
+          <input type="text" id="company" name="company">
+        </div>
+        <div class="form-field">
+          <label for="message">{{ .Params.labelMessage }}</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ .Params.labelSubmit }}</button>
+        <p class="form-note">{{ .Params.formNote }}</p>
+      </form>
+    </div>
+  </div>
+</section>
+{{ end }}

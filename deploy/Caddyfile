@@ -1,0 +1,39 @@
+# Caddy config for nexa.uno — automatic HTTPS (Let's Encrypt), no extra setup.
+# Put the built ./public on the server at /var/www/nexa and point Caddy here.
+#
+# Install Caddy on the Hetzner VPS (Debian/Ubuntu):
+#   sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+#   curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+#   curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+#   sudo apt update && sudo apt install caddy
+#
+# Then place this file at /etc/caddy/Caddyfile and run:  sudo systemctl reload caddy
+
+nexa.uno, www.nexa.uno {
+    root * /var/www/nexa
+    encode zstd gzip
+    file_server
+
+    # Redirect www -> apex
+    @www host www.nexa.uno
+    redir @www https://nexa.uno{uri} permanent
+
+    # Cache fingerprinted assets aggressively (filenames change on content change)
+    @assets path /scss/* /js/* /favicon.svg
+    header @assets Cache-Control "public, max-age=31536000, immutable"
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        X-Frame-Options "SAMEORIGIN"
+        -Server
+    }
+
+    # Hugo's pretty URLs already emit directory/index.html; serve 404 page if present
+    handle_errors {
+        rewrite * /404.html
+        file_server
+    }
+}

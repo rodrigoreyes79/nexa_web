@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.lead }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+{{ with .Params.services }}
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2">
+      {{ range . }}
+      <div class="card">
+        <div class="card-icon" aria-hidden="true">{{ .icon }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .body }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Content }}
+<section class="section section-tint">
+  <div class="container prose">{{ . }}</div>
+</section>
+{{ end }}
+
+{{ with .Params.steps }}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>{{ .heading }}</h2>
+      <p>{{ .subheading }}</p>
+    </div>
+    <div class="steps">
+      {{ range .items }}
+      <div class="step"><h3>{{ .title }}</h3><p>{{ .body }}</p></div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="section section-tint">
+  <div class="container">
+    <div class="cta-band">
+      <h2>{{ .Params.ctaHeading }}</h2>
+      <p>{{ .Params.ctaBody }}</p>
+      <a class="btn btn-light" href="{{ (.GetPage "/contact").RelPermalink }}">{{ .Params.ctaButton }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}

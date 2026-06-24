@@ -1,0 +1,38 @@
+[skip_to_content]
+other = 'Skip to content'
+
+[nav_cta]
+other = 'Get in touch'
+
+[hero_cta_primary]
+other = 'Talk to us'
+
+[hero_cta_secondary]
+other = 'See pricing'
+
+[footer_tagline]
+other = 'Payment reconciliation and integrations for modern businesses.'
+
+[footer_legal_heading]
+other = 'Legal'
+
+[footer_company_heading]
+other = 'Company'
+
+[footer_contact_heading]
+other = 'Contact'
+
+[footer_rights]
+other = 'All rights reserved.'
+
+[lang_switch]
+other = 'Español'
+
+[contact_email_label]
+other = 'Email'
+
+[on_this_page]
+other = 'On this page'
+
+[last_updated]
+other = 'Last updated'

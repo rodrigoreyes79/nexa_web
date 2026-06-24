@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ $title := .Title }}
+{{ $siteTitle := .Site.Title }}
+<title>{{ if .IsHome }}{{ $siteTitle }} — {{ .Site.Params.tagline }}{{ else }}{{ $title }} — {{ $siteTitle }}{{ end }}</title>
+
+{{ $desc := .Description | default .Site.Params.description }}
+<meta name="description" content="{{ $desc }}">
+<meta name="author" content="{{ .Site.Params.author }}">
+
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/schema.html" . }}
+
+<link rel="canonical" href="{{ .Permalink }}">
+{{ range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Site.Language.Lang }}" href="{{ .Permalink }}">
+{{ end }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+{{ $opts := dict "minify" hugo.IsProduction }}
+{{ $css := resources.Get "css/main.css" | css.TailwindCSS $opts | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b1437">

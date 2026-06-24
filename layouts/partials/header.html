@@ -1,0 +1,33 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ "/" | relLangURL }}" aria-label="NexaUno home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Nexa<span class="brand-accent">Uno</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" class="nav-menu">
+        {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{ end }}
+        <li class="nav-lang">
+          {{ with .Translations }}
+            {{ range . }}
+          <a href="{{ .Permalink }}" hreflang="{{ .Site.Language.Lang }}" rel="alternate">{{ i18n "lang_switch" }}</a>
+            {{ end }}
+          {{ else }}
+            {{ range .Site.Home.AllTranslations }}
+              {{ if ne .Site.Language.Lang $.Site.Language.Lang }}
+          <a href="{{ .Permalink }}" hreflang="{{ .Site.Language.Lang }}" rel="alternate">{{ i18n "lang_switch" }}</a>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </li>
+        <li><a class="btn btn-primary btn-sm" href="{{ (.GetPage "/contact").RelPermalink }}">{{ i18n "nav_cta" }}</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

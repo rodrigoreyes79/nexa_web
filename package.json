@@ -1,0 +1,10 @@
+{
+  "name": "nexa-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NexaUno marketing + legal website (Hugo + Tailwind CSS v4)",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4",
+    "tailwindcss": "^4"
+  }
+}

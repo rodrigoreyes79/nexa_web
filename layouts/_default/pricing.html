@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.lead }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="pricing-grid">
+      {{ range .Params.tiers }}
+      <div class="price-card{{ if .featured }} featured{{ end }}">
+        {{ if .badge }}<span class="price-badge">{{ .badge }}</span>{{ end }}
+        <h3>{{ .name }}</h3>
+        <div class="price-amount">{{ .price }}{{ with .period }}<span> {{ . }}</span>{{ end }}</div>
+        <p class="price-note">{{ .note }}</p>
+        <ul class="price-features">
+          {{ range .features }}<li>{{ . }}</li>{{ end }}
+        </ul>
+        <a class="btn {{ if .featured }}btn-primary{{ else }}btn-ghost{{ end }}" href="{{ ($.GetPage "/contact").RelPermalink }}">{{ .cta }}</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ with .Params.disclaimer }}<p class="price-disclaimer">{{ . }}</p>{{ end }}
+  </div>
+</section>
+
+{{ with .Content }}
+<section class="section section-tint">
+  <div class="container prose">{{ . }}</div>
+</section>
+{{ end }}
+{{ end }}

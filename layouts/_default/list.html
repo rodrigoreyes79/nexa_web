@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ if .Params.lead }}<p class="lead">{{ .Params.lead }}</p>{{ end }}
+  </div>
+</div>
+<section class="section">
+  <div class="container prose">
+    {{ .Content }}
+  </div>
+</section>
+{{ end }}

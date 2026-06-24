@@ -1,0 +1,38 @@
+[skip_to_content]
+other = 'Saltar al contenido'
+
+[nav_cta]
+other = 'Contactar'
+
+[hero_cta_primary]
+other = 'Habla con nosotros'
+
+[hero_cta_secondary]
+other = 'Ver precios'
+
+[footer_tagline]
+other = 'Conciliación de pagos e integraciones para empresas modernas.'
+
+[footer_legal_heading]
+other = 'Legal'
+
+[footer_company_heading]
+other = 'Empresa'
+
+[footer_contact_heading]
+other = 'Contacto'
+
+[footer_rights]
+other = 'Todos los derechos reservados.'
+
+[lang_switch]
+other = 'English'
+
+[contact_email_label]
+other = 'Correo'
+
+[on_this_page]
+other = 'En esta página'
+
+[last_updated]
+other = 'Última actualización'
